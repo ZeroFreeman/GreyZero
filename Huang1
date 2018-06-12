@@ -1,0 +1,109 @@
+#include<iostream>
+#include <string>
+#include<stdlib.h>
+using namespace std;
+
+
+class TCounter {//基类
+public:
+	virtual void  counter(TletterStatic &);
+
+};
+
+class TANCouter :public TCounter
+{    int numAn;
+   
+public:
+	TANCouter() { numAn = 0; }
+       
+		int couter(string s) {
+			
+			for (int i = 0; i < s.length(); i++)
+			{
+				if ((s[i] >= 'A'&&s[i] <= 'N') || (s[i] >= 'a'&&s[i] <= 'n'))
+					numAn++;
+				
+				
+			}
+			return numAn;
+		}
+		void clear() {
+			numAn = 0;
+		}
+};
+		//判断a_N  return TL
+
+
+class THZCouter :public TCounter
+{
+	int numHz = 0;
+public:
+	THZCouter() { numHz=0;}
+
+
+
+	int couter(string s) {
+		
+		for (int i = 0; i < s.length(); i++)
+		{
+			if ((s[i] >= 'H'&&s[i]<='Z') || (s[i]>='h'&&s[i] <= 'z'))
+				numHz++;
+			
+		}
+		return numHz;
+
+		
+
+	}//判断  r
+	void clear() {
+		numHz = 0;
+	}
+};
+
+class TLetterStatic
+{	
+private:
+	string s;
+	int other, num1, num2;
+	TANCouter can;
+	THZCouter chz;
+public:
+	TLetterStatic() { 
+		other = 0; 
+		num1 = 0;
+		num2 = 0;
+
+	}
+	
+
+		void Ocouter() {
+			for(int i = 0;;i++){
+				other = 0;
+				cin >> s;
+				for (int i = 0; i < s.length(); i++) {
+					
+					if ((s[i] <'A'|s[i] > 'Z' || s[i]<'a'|s[i] >'z'))
+						other++;
+					
+				}
+				num1 = can.couter(s);
+				num2 = chz.couter(s);
+				cout << " A—N: " << num1 << "  H-Z: " << num2 << "  Other: " << other << endl;
+				if (s == "off") {
+					break;
+				}
+				can.clear();
+				chz.clear();
+	
+			}
+			
+		}
+		
+};
+
+int main(){
+	TLetterStatic tls;
+	tls.Ocouter();
+	system("PAUSE");
+return 0;
+}
